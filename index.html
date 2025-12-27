@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Blog Posts</h1>
+    {% for post in posts %}
+        <div>
+            <h3>{{ post.title }} ({{ post.date_added|date:'M d, Y' }})
+                {% if user == post.owner %}
+                    <a href="{% url 'edit_post' post.id %}">Edit</a>
+                {% endif %}
+            </h3>
+            <p>{{ post.text|linebreaks }}</p>
+        </div>
+    {% empty %}<p>No posts yet.</p>{% endfor %}
+{% endblock %}
